@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Christmas Tree Background</title>
+<style>
+/* colors: change these to make it darker, brighter or warmer */
+:root {
+  --bg1: #0f3a24;       /* top */
+  --bg2: #082717;       /* middle */
+  --bg3: #031409;       /* bottom */
+}
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: linear-gradient(170deg, var(--bg1) 0%, var(--bg2) 55%, var(--bg3) 100%);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* soft pools of green light */
+.pool {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(60,200,110,.4), rgba(60,200,110,0));
+  animation: drift 60s ease-in-out infinite alternate;
+}
+.p1 { width: 90vmax; height: 90vmax; left: -34vmax; top: -30vmax; }
+.p2 { width: 75vmax; height: 75vmax; right: -34vmax; bottom: -22vmax; opacity: .7; animation-duration: 75s; animation-delay: -25s; }
+@keyframes drift { to { transform: translate(5vmax, 4vmax) scale(1.1); } }
+
+/* out-of-focus holiday lights: big soft discs that slowly glow and dim */
+.light {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(var(--c), .55) 0%, rgba(var(--c), .35) 62%, rgba(var(--c), 0) 100%);
+  animation: glow 7s ease-in-out infinite alternate;
+}
+.gold  { --c: 255,205,90; }
+.warm  { --c: 255,236,175; }
+.red   { --c: 255,95,85; }
+.l1 { width: 15vmax; height: 15vmax; left: 6vw;   top: 8vh;   animation-delay: -1s; }
+.l2 { width: 9vmax;  height: 9vmax;  left: 62vw;  top: 4vh;   animation-delay: -3s; animation-duration: 9s; }
+.l3 { width: 12vmax; height: 12vmax; right: -3vw; top: 22vh;  animation-delay: -5s; }
+.l4 { width: 8vmax;  height: 8vmax;  left: 34vw;  top: 14vh;  animation-delay: -2s; animation-duration: 8s; }
+.l5 { width: 13vmax; height: 13vmax; left: -4vw;  top: 52vh;  animation-delay: -4s; animation-duration: 10s; }
+.l6 { width: 10vmax; height: 10vmax; right: 8vw;  top: 62vh;  animation-delay: -6s; }
+.l7 { width: 7vmax;  height: 7vmax;  left: 48vw;  top: 74vh;  animation-delay: -1.5s; animation-duration: 8.5s; }
+.l8 { width: 11vmax; height: 11vmax; left: 12vw;  top: 84vh;  animation-delay: -3.5s; }
+@keyframes glow { from { opacity: .35; transform: scale(.94); } to { opacity: .95; transform: scale(1.06); } }
+
+/* dark vignette around the edges */
+.top {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,.5) 100%);
+}
+
+/* add ?still to the URL, or turn on Reduce Motion, to stop the movement */
+.still .pool, .still .light { animation: none; }
+@media (prefers-reduced-motion: reduce) { .pool, .light { animation: none; } }
+</style>
+</head>
+<body>
+<div class="pool p1"></div><div class="pool p2"></div>
+<div class="light gold l1"></div><div class="light warm l2"></div><div class="light red l3"></div><div class="light gold l4"></div>
+<div class="light warm l5"></div><div class="light gold l6"></div><div class="light red l7"></div><div class="light warm l8"></div>
+<div class="top"></div>
+<script>
+if (/[?&#]still/.test(location.search + location.hash)) document.documentElement.classList.add('still');
+</script>
+</body>
+</html>
